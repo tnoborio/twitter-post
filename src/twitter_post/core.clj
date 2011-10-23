@@ -1,12 +1,18 @@
 
 (ns twitter-post.core
+  (use twitter-post.config)
   (import twitter4j.TwitterFactory
           twitter4j.conf.ConfigurationBuilder))
 
-(def conf (ConfigurationBuilder. ))
-(.setDebugEnabled conf true)
-(.setOAuthConsumerKey conf "hoge")
-
-(def twitter-factory (TwitterFactory.
-                      (.build conf)))
-(def twitter (.getInstance twitter-factory))
+(defn authorization-url []
+  (let [twitter-factory (TwitterFactory.)
+        twitter (.getInstance twitter-factory)]
+    (.setOAuthConsumer twitter
+                       consumer-key
+                       consumer-secret)
+    (let [request-token
+          (.getOAuthRequestToken twitter)]
+      (.getAuthorizationURL
+       request-token))))
+  
+(prn (authorization-url))
