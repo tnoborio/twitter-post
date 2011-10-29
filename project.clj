@@ -2,6 +2,7 @@
 
 (defproject twitter-post "1.0.0-SNAPSHOT"
   :description "FIXME: write description"
+  :main twitter-post.core
   :dependencies [[org.clojure/clojure "1.2.1"]
                  [org.twitter4j/twitter4j-core "[2.2,)"]]
 
